@@ -122,16 +122,42 @@ def Find_nearKey(image_path):
     for b in res_list:
         if 'material' in b.lower():
             key_text = b.lower()
-            # print(key_text)
-            cleaned_text = re.search(r'material(.*?)(?=\.|$)', key_text, flags=re.IGNORECASE)
-            # cleaned_text = re.search(r'material\s*:(.*?)(?=\s*material|\.|$)', key_text, flags=re.IGNORECASE)
-            if cleaned_text is not None:
-                cleaned_text = cleaned_text.group(1).strip()
-                if len(cleaned_text) >= 4:
-                    nearest_text = cleaned_text
-                    print(nearest_text)
-                    return nearest_text
-                    
+            m_text = re.search(r'material\s*:\s*(.*?)(?=\.|$)', key_text, flags=re.IGNORECASE)
+            if m_text is not None:
+                m_text = m_text.group(1).strip()
+                if len(m_text) >= 4:
+                    print(f"'material': '{m_text}'")
+                    break
+            else:
+                m_text = re.sub(r'material', '', key_text, flags=re.IGNORECASE).strip()      
+                if len(m_text)<=35:
+                    print(f"'material': '{m_text}'")
+    for b in res_list:
+        if 'part no' in b.lower() or 'part number' in b.lower():
+            print(b.lower())
+            key_text = b.lower()
+            p_text1 = re.search(r'(part number)\s*:\s*(.*?)(?=\.|$)', key_text, flags=re.IGNORECASE)
+            if p_text1 is not None:
+                for i in range(1,p_text1.lastindex + 1):
+                    group_value = p_text1.group(i)  # Lấy giá trị của nhóm thứ i
+                    if group_value is not None and any(char.isdigit() for char in group_value):
+                        print(f"'part number':'{group_value}'")
+                        break
+            p_text2 = re.search(r'(part no)\s*:\s*(.*?)(?=\.|$)', key_text, flags=re.IGNORECASE)
+            if p_text2 is not None:
+                for i in range(1,p_text2.lastindex + 1):
+                    group_value = p_text2.group(i)  # Lấy giá trị của nhóm thứ i
+                    if group_value is not None and any(char.isdigit() for char in group_value):
+                        print(f"'part number':'{group_value}'")
+                        break
+            # else:
+            #     p_text1 = re.sub(r'(part number)', '', key_text, flags=re.IGNORECASE).strip()   
+            #     p_text2 = re.sub(r'(part no)', '', key_text, flags=re.IGNORECASE).strip()       
+                # if len(p_text1)< 35:
+                #     print(f"'part number': '{p_text1}'")
+                # if len(p_text2)< 35:
+                #     print(f"'part no': '{p_text2}'")
+        
                     
 def process_pdf(pdf_path, output_folder):
     png_files = pdf_to_png(pdf_path, output_folder)
@@ -142,8 +168,11 @@ def process_pdf(pdf_path, output_folder):
 output_folder = 'output_images'
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
-pdf_path = r'D:\compare_3d\drawing\data_drawing\8151716 X2_Redacted.pdf'
+pdf_path = r"D:/compare_3d/drawing/data_drawing/0000236163-C24_1_PDF_1_LH_CRANK_AND_MASTER_Redacted.pdf"
 process_pdf(pdf_path, output_folder)
 
 # D:/compare_3d/drawing/data_drawing/930-73886_-_REDACTED.pdf
 # D:/compare_3d/drawing/data_drawing/72745020_Rev_B_redacted.pdf
+# D:\compare_3d\drawing\data_drawing\8151716 X2_Redacted.pdf
+# D:/compare_3d/drawing/data_drawing/144016_1_Redacted.pdf
+# D:/compare_3d/drawing/data_drawing/0000236163-C24_1_PDF_1_LH_CRANK_AND_MASTER_Redacted.pdf
