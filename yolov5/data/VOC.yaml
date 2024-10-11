@@ -1,0 +1,15 @@
+path: .\\datasets\\obj_train_data
+train: ./
+val: ./
+test: 
+weights: 
+image: 1024
+epoch: 100
+batch-size: 8
+# Classes
+names:
+  0: table
+  1: material
+  2: part_number
+  3: fininsh
+  4: dwg_no
