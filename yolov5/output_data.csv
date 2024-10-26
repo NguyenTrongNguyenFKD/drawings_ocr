@@ -1,0 +1,208 @@
+class_name,extracted_text
+Processing image: ./datasets/test\0000236163-C24_1_PDF_1_LH_CRANK_AND_MASTER_Redacted_page_1.png
+material,False,:,"ALUMINUM, 7050-T7451 PER AMS 4050. MAX THICKNESS 500 INCHES ULTRASONIC INSPECT RAW STOCK PER ASTM B594 CLASS A OR AMS-STD-2154 CLASS A_"
+part_number,False,:,0000236163-C25
+finish,False,:," FINISH: STEP 1: APPLY CHEMICAL CONVERSION COATING: TYPE Il, CLASS 3 PER MIL-DTL-5541F USE ANY MATERIAL FROM QPL-81706. FULLY IMMERSE PART IN SOLUTION AND ROTATE PART UNTIL COATING IS UNIFORM, ENSURING COMPLETE COVERAGE OF BLIND FEATURES_ STEP 2: ANODIZE TYPE Ill, CLASS 2 (BLACK), SEALED, PER MIL-A-8625F. MASK ALL THREADED HOLES AND INDICATED SURFACES PRIOR TO ANODIZE ALL DIMENSIONS ON DRAWING APPLY AFTER ANODIZE_"
+dwg_no,True,:, DWG NO 0000236163-C24
+Processing image: ./datasets/test\0000236163-C24_1_PDF_1_LH_CRANK_AND_MASTER_Redacted_page_2.png
+dwg_no,True,:, DNSNO 0000236163-C24
+Processing image: ./datasets/test\0000238064-c01_Redacted_page_1.png
+material,False,:,"ALUMINUM, 7050-T7451 PER AMS 4050."
+part_number,False,:,", LOT, REVISION, AND PURCHASE ORDERMORK ORDER NUMBER AT INDICATED LOCATION PER AS478, METHOD 3B2 (CONTROLLED ENGRAVE) OR 15B3 (LASER ENGRAVE): PART MARK PRIOR TO ANODIZATION: TOUCH UP PART MARK USING ALODINE PEN AFTER COMPLETION OF COATING APPLICATION_"
+finish,False,:," FINISH: ANODIZE TYPE Ill, CLASS 2 (BLACK), SEALED, PER MIL-A-8625F. ALL DIMENSIONS ON DRAWING APPLY AFTER ANODIZE,"
+finish,False,:," IDENTIFY PART NUMBER, LOT, REVISION, AND PURCHASE ORDERMORK ORDER NUMBER AT INDICATED LOCATION PER AS478, METHOD 3B2 (CONTROLLED ENGRAVE) OR 15B3 (LASER ENGRAVE): PART MARK PRIOR TO ANODIZATION: TOUCH UP PART MARK USING ALODINE PEN AFTER COMPLETION OF COATING APPLICATION_"
+dwg_no,True,:, DWG NO 0000238064-XXX
+Processing image: ./datasets/test\003-760-6050_NC.16_Redacted_page_1.png
+material,True,:, A-286 ALLOY 
+part_number,True,:, 003-760-6050-001 
+part_number,False,:," IDENTIFY PART PER AS478-7A1 (ELETRICAL ETCH), AS478-15A2 (DOT MATRIX), OR AS478-15B2 (LASER ENGRAVE): LOCATE APPROXIMATELY WHERE SHOWN. IDENTIFY AS FOLLOWS: PIN: 003-760-6050-001 SIN: YY "
+dwg_no,True,:, DRAWING NO 003-760-6050
+Processing image: ./datasets/test\003-760-6050_NC.16_Redacted_page_2.png
+dwg_no,True,:, DRAWINGNO 003-760-6050
+Processing image: ./datasets/test\12017019-D_REVA(1)_Redacted_page_1.png
+material,True,:, LiOT 6231-7651 VATTN4
+part_number,True,:, I20T7LI
+dwg_no,True,:, 12017019
+Processing image: ./datasets/test\144016_1_Redacted_page_1.png
+material,True,:, FEHCRES MlERIAl
+part_number,True,:, Jelle1 PARIMunaER
+finish,True,:, PSYT/ 4uS 7DI FINISH
+dwg_no,True,:, 144016
+Processing image: ./datasets/test\15PRT4817-20revA_Redacted_page_1.png
+material,False,:, PROCESSING THREADED INSERTS (HELICOILS) TO BE INSTALLED BY BCT.
+material,True,:, 6061 T6
+dwg_no,True,:, DOCUMENT NMBER ISPRT4817 Z0
+Processing image: ./datasets/test\15PRT4817-20revA_Redacted_page_2.png
+Processing image: ./datasets/test\20026106-A Redline 021622_Rev-A__Redacted_page_1.png
+material,False,:,15-5 STAINLESS STEEL BAR CONDITION H1025 PER AMS 5659.
+material,True,:, 18-8 STAINLESS STEEL 15-5PH SS CONDITION H1025 OR NOTE
+part_number,True,:, 93904A100 20026106-001 IDENTIFRCAPION NO
+finish,False,:, FINISH: BARE
+dwg_no,True,:, 20026106
+Processing image: ./datasets/test\234-00-383-A_REV_B_Redacted_page_1.png
+material,False,:,ALUMINUM 606 | - T6
+part_number,True,:, 'ART 234 -00 - 383
+Processing image: ./datasets/test\24100-333 BEAM SPLITTER BASE (150 - 24100-333 - 1 - A) - 1_Redacted_page_1.png
+material,True,:, AISI 304 AISE 304 ALUMINUM 6061 
+part_number,True,:, NASI130-08L15 NASI130-3L15 24100-333-001 
+dwg_no,True,:, DYDN 24100-333
+Processing image: ./datasets/test\24100-333 BEAM SPLITTER BASE (150 - 24100-333 - 1 - A) - 1_Redacted_page_2.png
+dwg_no,True,:, DVGNO 24100-333
+Processing image: ./datasets/test\24100-334 - 1_Redacted_page_1.png
+material,True,:, AISI 304 AISI 304 ALUMINUM 6061 
+part_number,True,:, NAS 30-06L15 NASI 30-04L15 24100-334-001 
+dwg_no,True,:, DYDN 24100-334
+Processing image: ./datasets/test\24100-334 - 1_Redacted_page_2.png
+dwg_no,True,:, DVGNO 24100-334
+Processing image: ./datasets/test\24100-334 - 1_Redacted_page_3.png
+dwg_no,True,:, 24100-334
+Processing image: ./datasets/test\261-2587-00_D_Redacted_page_1.png
+material,False,:,"I: AL AH8Y _ 6061-0 IAW AMS 4025, Q-A-250/11 _ 2: AL 6061-T6 IAW AMS4027 , QQ-A-250-11 ."
+finish,False,:," 2 FINISH: ANODIZE, COLOR BLACK PER MIL-A-8625 TYPE Il, CLASS 2"
+dwg_no,True,:, DWG NO: 261-2587-00
+Processing image: ./datasets/test\49258014_Rev_B_redacted_page_1.png
+material,False,:,"ALUMINUM ALLOY, 6061-T651 PER AMS-QQ-A-250/11, OR ALUMINUM ALLOY, 6061-T651 PER AMS-QQ-A-200/8, AMS 4173 OR ASTM-B221."
+part_number,True,:, 49258014-1
+finish,False,:," FINISH PER MIL-STD-171, FINISH 7.3.3."
+dwg_no,True,:, DWG NO 49258014
+Processing image: ./datasets/test\72745020_Rev_B_redacted_page_1.png
+material,False,:,"ALUMINUM PLATE, ALLOY 6061, TEMPER T651, PER AMS-QQ-A-250/11,ASTM B209 OR AMS 4027 ."
+material,True,:, NASM21075 NASM2O6O5 NATERIAL SPECIFICATION
+part_number,False,:, 72745020-10 72745020-1
+part_number,True,:, MS21075L3N MS2OGOSR3W3 72745020- 72745020 IDENTIFYING NO
+finish,False,:," FINISH PER MIL-STD-171, FINISH 7.3.3."
+dwg_no,True,:, DWG NO 72745020
+Processing image: ./datasets/test\72745020_Rev_B_redacted_page_2.png
+dwg_no,True,:, DWGTC 72745020
+Processing image: ./datasets/test\7840334_Redacted_page_1.png
+material,False,:,STEEL PER ASTM A572
+finish,False,:," CADIUM PLATE PER QQ-P-416, TYPE II, CLASS 2 SUPPLEMENTARY TREATMENT TO BE IRIDESCENT YELLOW."
+dwg_no,True,:, DRAWING NO_ 7840334
+Processing image: ./datasets/test\81010003_Rev_-_redacted_page_1.png
+material,True,:, NASM21209 NASM21209 MltFPI SPECIFICATION
+material,False,:,"ALUMINUM PLATE; ALLOY 6061, TEMPER T651, PER ASTM B209 OR AMS 4027 . OPTIONAL MATERIAL: ALUMINUM BAR, EXTRUDED, ALLOY 6061, TEMPER T6511, PER AMS-QQ-A-200/8 OR ASTM B221."
+part_number,True,:, 81010003-9
+part_number,True,:, MS21209C0420 MS21209C0220 81010003- 81010003 IDENTIFYING NO
+finish,False,:," FINISH: MIL-STD-171, FINISH 7.3.3."
+dwg_no,True,:, DWG NO 81010003
+Processing image: ./datasets/test\8151716 X2_Redacted_page_1.png
+material,False,:,ALUMINUM ALLOY 6061-16 PER ASTM-B221 OR AMS-QQ-A-200/8 OR ALUMINUM ALLOY 6061-1651 PER ASTM B209 OR AMS 4027_
+part_number,False,:," MARK 60225-8151716, APPROPRIATE DASH"
+finish,False,:, MATERIAL: ALUMINUM ALLOY 6061-16 PER ASTM-B221 OR AMS-QQ-A-200/8 OR ALUMINUM ALLOY 6061-1651 PER ASTM B209 OR AMS 4027_ FINISH: GOLD CHEMICAL CONVERSION COATING IAW
+finish,False,:," FINISH: GOLD CHEMICAL CONVERSION COATING IAW SAE MIL-C-5541 , TYPE I, CLASS IA."
+dwg_no,True,:, 8151716
+Processing image: ./datasets/test\8151716 X2_Redacted_page_2.png
+dwg_no,True,:, 8151716
+Processing image: ./datasets/test\8151716 X2_Redacted_page_3.png
+dwg_no,True,:, 8151716
+Processing image: ./datasets/test\930-44468_-_redacted_page_1.png
+material,True,:," DESCRIPTION HINGE; BUTT, CONTINUOUS (PIANO); .060 THK; .125 PIN DIA"
+part_number,False,:,04801-930-44468 AND APPLICABLE REVISION IAW MIL-STD-130 -0033). LOCATE APPROX WHERE SHOWN: (PS-(
+part_number,True,:, A-A-555924-16
+finish,False,:," FINISH: CHEMICAL CONVERSION COATING IAW MIL-C-5541, CLASS 1A. (PS-0095) PAINT USING COLOR NUMBER 26307 (GRAY) IAW FED-STD-595_"
+dwg_no,True,:, DRJMMNG KO 930-44468
+Processing image: ./datasets/test\930-63542_-_REDACTED_page_1.png
+material,False,:,"MAT-S218O0-L1 CRES, NITRONIC 60, UNS21800, LEVEL STRAIN HARDEN IAW ASTM-A193 A194, A240, A276 OR A479. MINIMUM YIELD STRENGTH SHALL BE 90 KSI."
+finish,False,:, PASSIVATE IAW ASTM A967 .
+dwg_no,True,:, DRIWNnGNC 930-63542
+Processing image: ./datasets/test\930-73886_-_REDACTED_page_1.png
+material,False,:,"MAT-S17400-H1150 STEEL, STAINLESS, UNS S17400, TYPE 630, COND H1150 ASTM A564."
+finish,False,:," FINISH: ELECTRODEPOSITED SILVER PLATE ASTM B700, TYPE GRADE A (MAT)_ CLASS S (SUPPLEMENTARY TARNISH-RESISTANT TREATMENT) UNDERCOAT: COPPER .0002 THICK MIN. OVER BASE MATERIAL; NICKEL 0002 THICK MIN. OVER COPPER; SILVER STRIKE OVER NICKEL IAW SECTION 3.3.5 PLATING: SILVER PLATE .0002-.0004 THICK OVER UNDERCOAT IAW SECTION 3.4.1 TARNISH RESISTANCE COATING: CHROMATE-TYPE SUPPLIMENTAL DIP OVER SILVER IAW SECTIONS 3.4.5 AND 6.1.2."
+dwg_no,True,:, DRATING No 930-73886
+Processing image: ./datasets/test\ALT19806 Rev -_Redacted_page_1.png
+material,False,:, Morenntt Oenlno
+dwg_no,True,:, LeT
+Processing image: ./datasets/test\ALT19806 Rev -_Redacted_page_2.png
+dwg_no,True,:, Altisan!
+Processing image: ./datasets/test\C903020_B_Redacted_page_1.png
+part_number,True,:, C903020- [
+finish,False,:," FINISH: PASSIVATE IAW SAE AMS-2700, TYPE 2,"
+dwg_no,True,:, Del No 903020
+Processing image: ./datasets/test\C903020_B_Redacted_page_2.png
+dwg_no,True,:, Del No 903020
+Processing image: ./datasets/test\C903020_B_Redacted_page_3.png
+dwg_no,True,:, Del No 903020
+Processing image: ./datasets/test\DOC-0086497C Redacted_page_1.png
+material,False,:, ; PEEK VICTREX 4506
+finish,False,:, SURFACE FiniSH; MAX
+dwg_no,True,:, DOC-0086497
+Processing image: ./datasets/test\DOC-0086497C Redacted_page_2.png
+part_number,False,:, 0024378019 0024378021 0024378023 0024378025 0024378027 0024378029 0024378031
+dwg_no,True,:, CUSP LOCKING MFG AID D DOC-0086497 C SCHL 681 SHEET 2 OF 1272 REv
+Processing image: ./datasets/test\DOC-0086497C Redacted_page_3.png
+part_number,True,:, 0024378019 0024378021 0024378023 0024378025 0024378027 0024378029 0024378031
+dwg_no,True,:, DfSCBIPTIOS CUSP LOCKING MFG AID D DOC-0086497 C SCHL 681 SHEET OF 1272 REv
+Processing image: ./datasets/test\DOC-0086497C Redacted_page_4.png
+dwg_no,True,:, CUSP LOCKING MFG AID DOC-0086497 C SCHL SHEET OF 1272 REv
+Processing image: ./datasets/test\E17972320-FN1_Rev-D_Redacted_page_1.png
+material,True,:, AL UMINUM ALUminUm 606 /- T6 ALUMINUM 606 / - T6 
+part_number,True,:, 974834060 
+finish,True,:, FINISH NONE
+dwg_no,True,:, E/7972320
+Processing image: ./datasets/test\E17972320-FN1_Rev-D_Redacted_page_2.png
+dwg_no,True,:, E7972320
+Processing image: ./datasets/test\E17972320-FN1_Rev-D_Redacted_page_3.png
+dwg_no,True,:, E7972320
+Processing image: ./datasets/test\E17972320-FN1_Rev-D_Redacted_page_4.png
+dwg_no,True,:, E7972320
+Processing image: ./datasets/test\E17972320-FN1_Rev-D_Redacted_page_5.png
+dwg_no,True,:, E7972320
+Processing image: ./datasets/test\GLD0244K5515 A_Redacted_page_1.png
+material,False,:," JEX""L.,4""  '44""! Eleses""nti"""
+finish,False,:," Th 42""} ""EeE ni.a %il ZVF Elr !e Iopiz[ in>icaTE B SLRMCE;"
+dwg_no,True,:, GDOZ K5545
+Processing image: ./datasets/test\ML-49145 PRINT_Redacted_page_1.png
+material,False,:,"AT FABRICATOR'S OPTION: ALUMINUM ALLOY 6061-T651, EXTRUDED BAR OR ROD (ROUND), PER SAE AMS-QQ-A-200/8. ALTERNATE: ALUMINUM ALLOY PLATE, 6061-T651, PER SAE AMS4027 . PRIOR TO START OF MANUFACTURING, RESPONSIBLE SNL ENGINEER MUST VERIFY ORDERED STOCK MATERIAL CERTIFICATIONS_ CERTIFICATIONS NOT IN ENGLISH WILL BE REJECTED."
+material,True,:," SCR,SCH,.0860-56UNRC-3A,.250 ALY STL NUT,HEX 086-56UNC-2B CRES BRACKET AL6061-T651 HEMISPHERE AL6O61-T651 MARKING, GENERAL METHODS GENERAL REQUIREMENTS DESCRIPTIONI"
+part_number,True,:, 001973A-000
+part_number,True,:, NAS1352-02-4 MS35649-224 001973A-200 001973A-100 9919100 9900000 PARTICONTROL NO
+dwg_no,True,:, DRAWING NUMBER 001973A
+Processing image: ./datasets/test\ML-49145 PRINT_Redacted_page_2.png
+material,True,:," ALUMINUM ALLOY 6061, BAR, ROD, SHAPES, TUBE & WIRE, EXTRUDED ALUMINUM ALLOY SHEET AND PLATE; PRECIPITATION AND SOLUTION HEAT TREATED ANODIZING ALUMINUM GENERAL REQUIREMENTS DESCRIPTION "
+part_number,True,:, 1 Ee
+part_number,True,:, ARs| SAE AMS-QQ-A-200/8 ALT  SAE AMS4027 9904102 9900000 PARTICONTROL NO
+dwg_no,True,:, DRAWING NUMBER 001973A
+Processing image: ./datasets/test\ML-49145 PRINT_Redacted_page_3.png
+material,True,:," ALUMINUM ALLOY 6061, BAR, ROD, SHAPES, TUBE & WIRE, EXTRUDED ALUMINUM ALLOY SHEET AND PLATE; PRECIPITATION AND SOLUTION HEAT TREATED ANODIZING ALUMINUM GENERAL REQUIREMENTS DESCRIPTION "
+part_number,True,:, 1 Ee
+part_number,True,:, ARs| SAE AMS-QQ-A-200/8 ALT  SAE AMS4027 9904102 9900000 PARTICONTROL NO
+dwg_no,True,:, DRAWING NUMBER 001973A
+Processing image: ./datasets/test\PN 142906 B3 Redacted_page_1.png
+material,True,:," 250 THK 6AL-4v ~ALY-PLATE. AB - COND 6N0400-0134-268 } 250 CRES CUSTOM 455 Rod_ COND 6L0600 - 520} 0oo THK ~ALY-FLATE, AB- CONO 6N0400-0134-274 } HacEbTAL"
+part_number,True,:, iog4ticm
+finish,False,:," DRY FILM LUBE ALL SURFACES EXCEPT THOSE NOTEO PER PR6-20-1-1 , EXCEPT NOT ANODIZE THE PART_ ORY FILM SHALL PER C600541-1."
+finish,True,:, 5ns 
+dwg_no,True,:, 42906
+Processing image: ./datasets/test\PN 142906 B3 Redacted_page_2.png
+dwg_no,True,:, 42906
+Processing image: ./datasets/test\PN 142906 B3 Redacted_page_3.png
+dwg_no,True,:, 42906
+Processing image: ./datasets/test\PN UWA22095 Rev B_page_1.png
+material,False,:," TERIAL TI.64[-4""-STA _"
+part_number,True,:, Sn :al Bc M=:m
+dwg_no,True,:, VA22095
+Processing image: ./datasets/test\R2234504_A_Redacted_page_1.png
+finish,False,:," FINISH: CHEMICAL CONVERSIONCOAT IAW MIL-DTL-5541 CLASS 3 , YELLOW _"
+dwg_no,True,:, DWG NO R 2 2 3 4 5 0 4
+Processing image: ./datasets/test\R2234504_A_Redacted_page_2.png
+dwg_no,True,:, DWG NO R 2 23 4 5 0 4
+Processing image: ./datasets/test\S33956_Redacted_page_1.png
+material,False,:,BRASS
+finish,False,:, SurFLCE finie  BETTES
+dwg_no,False,:, pocylent S33956
+Processing image: ./datasets/test\SK2002298-X1_Redacted_page_1.png
+material,False,:,ALUM NUM A_LOY 606 T65 PER SAE AM54027 OR ASTM B209;
+part_number,True,:, 5k?002298 005 5k7007298 00 5k?002298 002 5k?002298 0o PART NUMBFR
+part_number,True,:, PART OF LEN NG NO Sk2ooz2e8 89 Sk2ooz2s8 88 Sk2c0z298 8 / Sk2ooz2e8 96 Sk2ooz2s8 85 NAS: 30 041 15
+finish,False,:," 2 FERMSHTECHEV CAL CONVERSTON COAT PER MIL DTL 554 YFE CLASS TCUCHUP W ITAIN SPEC [ F CAT OV LTMTTS, ExCEST COL_ORLESS CJATING NOT PERM TTEC"
+dwg_no,True,:, IDRAWINC Sk2ooz298
+Processing image: ./datasets/test\SSG1004202_A_redacted_page_1.png
+material,False,:,7075-173 OR -1735 - ALUMINUM PER AMS-QQ-A-225/9 AmS-QQ-250/12 OR AmS4078_
+finish,False,:," FINISH: A. CHROMATE PER MIL-DIL-5541 TYPE CLASS PRIOR TO ANODIZE: HARD ANODIZE PER MIL-A-8625, TYPE IlI; CLASS TO A THICKNESS OF .002 MAX [.001 MAX BUILDUPI. MASK INDICATED FEATURES PRIOR TO ANODIZE"
+dwg_no,True,:, DWG NO. SSG1004202
+Processing image: ./datasets/test\SSG1004202_A_redacted_page_2.png
+dwg_no,True,:, DWG NO. SSG1004202
+Processing image: ./datasets/test\UBC22837-1_Rev-A_Redacted_page_1.png
+material,False,:," MATER |AL AL_ALY_7050-T7451PER SAE AMS405o , 00 MAX , STK _ ThK"
+finish,False,:," FINSH CHEM FTLM ENT RE PART PER MVL-DTL -554 / TYPE 1 CLASS |4 , MASk ALL THREADEd HOLeS And/or |ndicATED EATURES FRom ' Anodize AND PR |MER_ ANOD IZE PER MIL-A-8625 TYPE 1 CLASS APPLY TWO COATS EPOXY  PRIMER PER MTL PRF- 23377 , TYPE CLASS N , (0 0012 To 0 . 0018 ) _ PER MIL-DTL -/826 4"
+dwg_no,True,:, DMG . NO UBC22837
