@@ -1,15 +1,34 @@
-path: .\\datasets\\obj_train_data
+path: .\\datasets\\datav2\\obj_train_data
 train: ./
 val: ./
 test: 
-weights: 
-image: 1024
-epoch: 100
-batch-size: 8
+weights: .\yolov5m.pt
+image: 2048
+epoch: 200
+batch-size: 6
 # Classes
+
 names:
   0: table
   1: material
   2: part_number
   3: fininsh
   4: dwg_no
+  5: drawn
+  6: ds_engineer
+  7: note
+
+
+# names:
+#   0: table
+#   1: material
+#   2: part_number
+#   3: fininsh
+#   4: dwg_no
+#   5: drawn
+#   6: checked
+#   7: drawn_date
+#   8: check_date
+#   9: ds_engineer
+#   10: note
+#   11: ds_date

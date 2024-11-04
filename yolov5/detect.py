@@ -34,9 +34,10 @@ import os
 import platform
 import sys
 from pathlib import Path
-
+import easyocr
 import torch
-
+from difflib import SequenceMatcher
+import re 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
 if str(ROOT) not in sys.path:
@@ -73,9 +74,9 @@ def run(
     data=ROOT / "data/coco128.yaml",  # dataset.yaml path
     imgsz=(640, 640),  # inference size (height, width)
     conf_thres=0.25,  # confidence threshold
-    iou_thres=0.45,  # NMS IOU threshold
-    max_det=20,  # maximum detections per image
-    device="",  # cuda device, i.e. 0 or 0,1,2,3 or cpu
+    iou_thres=0.5,  # NMS IOU threshold
+    max_det=15,  # maximum detections per image
+    device="cpu",  # cuda device, i.e. 0 or 0,1,2,3 or cpu
     view_img=False,  # show results
     save_txt=False,  # save results to *.txt
     save_format=0,  # save boxes coordinates in YOLO format or Pascal-VOC format (0 for YOLO and 1 for Pascal-VOC)
@@ -91,8 +92,8 @@ def run(
     project=ROOT / "runs/detect",  # save results to project/name
     name="exp",  # save results to project/name
     exist_ok=False,  # existing project/name ok, do not increment
-    line_thickness=3,  # bounding box thickness (pixels)
-    hide_labels=False,  # hide labels
+    line_thickness=1,  # bounding box thickness (pixels)
+    hide_labels=True,  # hide labels
     hide_conf=False,  # hide confidences
     half=False,  # use FP16 half-precision inference
     dnn=False,  # use OpenCV DNN for ONNX inference
@@ -182,6 +183,7 @@ def run(
     # Run inference
     model.warmup(imgsz=(1 if pt or model.triton else bs, 3, *imgsz))  # warmup
     seen, windows, dt = 0, [], (Profile(device=device), Profile(device=device), Profile(device=device))
+    data_csv =[]
     for path, im, im0s, vid_cap, s in dataset:
         with dt[0]:
             im = torch.from_numpy(im).to(model.device)
@@ -214,7 +216,6 @@ def run(
 
         # Define the path for the CSV file
         csv_path = save_dir / "predictions.csv"
-
         # Create or append to the CSV file
         def write_to_csv(image_name, prediction, confidence):
             """Writes prediction data for an image to a CSV file, appending if the file exists."""
@@ -224,6 +225,144 @@ def run(
                 if not csv_path.is_file():
                     writer.writeheader()
                 writer.writerow(data)
+        
+        def get_data_form_crop(img_ocr, class_name, pathsave):
+            reader = easyocr.Reader(['en'], gpu=True)
+            gray_image = cv2.cvtColor(img_ocr, cv2.COLOR_BGR2GRAY)
+            _, thresholded_image = cv2.threshold(gray_image, 200, 255, cv2.THRESH_BINARY)
+            new_width = int(thresholded_image.shape[1] * 3 )  
+            new_height = int(thresholded_image.shape[0] * 3) 
+            thresholded_image =cv2.resize(thresholded_image, (new_width, new_height), interpolation=cv2.INTER_CUBIC)
+            result = reader.readtext(thresholded_image, detail=1)
+            text_paragraph = ""        
+            for (bbox, text, confidence) in result:
+                if confidence < 0.2:
+                    continue
+                (top_left, top_right, bottom_right, bottom_left) = bbox
+                y_min = int(min(top_left[1], top_right[1]))
+                y_max = int(max(bottom_left[1], bottom_right[1]))
+                if y_min > 1 and y_max < thresholded_image.shape[0] - 1:
+                    text_paragraph = text_paragraph +" "+ text
+            if len(text_paragraph) == 0:
+                return [ class_name, text_paragraph]
+            text_paragraph = text_paragraph.lower()    
+            if class_name == "material":
+                text1, key1, fl1, pos1 = compare_and_replace("material",text_paragraph)
+                text2, key2, fl2, pos2 = compare_and_replace("description",text_paragraph)
+                
+                if fl1:
+                    if ':' in text1[pos1:]:
+                        string = re.sub(rf'^.*?{re.escape(key1)}[:\s]*', '', text1, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key1)}\s*', '', text1, flags=re.IGNORECASE)]
+                elif fl2:
+                    if ':' in text2[pos2:]:
+                        string = re.sub(rf'^.*?{re.escape(key2)}[:\s]*', '', text2, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key2)}\s*', '', text2, flags=re.IGNORECASE)]
+            
+            elif class_name == "part_number":
+                text1, key1, fl1, pos1 = compare_and_replace("partnumber",text_paragraph)
+                text2, key2, fl2, pos2 = compare_and_replace("partno",text_paragraph)
+                
+                if fl1:
+                    if ':' in text1[pos1:]:
+                        string = re.sub(rf'^.*?{re.escape(key1)}[:\s]*', '', text1, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key1)}\s*', '', text1, flags=re.IGNORECASE)]
+                elif fl2:
+                    if ':' in text2[pos2:]:
+                        string = re.sub(rf'^.*?{re.escape(key2)}[:\s]*', '', text2, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key2)}\s*', '', text2, flags=re.IGNORECASE)]
+            
+            elif class_name == "dwg_no":
+                text1, key1, fl1, pos1 = compare_and_replace("drawingno",text_paragraph)
+                text2, key2, fl2, pos2 = compare_and_replace("dwgno",text_paragraph)
+                
+                if fl1:
+                    if ':' in text1[pos1:]:
+                        string = re.sub(rf'^.*?{re.escape(key1)}[:\s]*', '', text1, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key1)}\s*', '', text1, flags=re.IGNORECASE)]
+                elif fl2:
+                    if ':' in text2[pos2:]:
+                        string = re.sub(rf'^.*?{re.escape(key2)}[:\s]*', '', text2, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key2)}\s*', '', text2, flags=re.IGNORECASE)]
+            elif class_name == "fininsh":
+                text1, key1, fl1, pos1 = compare_and_replace("finish",text_paragraph)
+                if fl1:
+                    if ':' in text1[pos1:]:
+                        string = re.sub(rf'^.*?{re.escape(key1)}[:\s]*', '', text1, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key1)}\s*', '', text1, flags=re.IGNORECASE)]
+                    
+            elif class_name == "drawn":
+                text1, key1, fl1, pos1 = compare_and_replace("drawn",text_paragraph)
+                if fl1:
+                    if ':' in text1[pos1:]:
+                        string = re.sub(rf'^.*?{re.escape(key1)}[:\s]*', '', text1, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key1)}\s*', '', text1, flags=re.IGNORECASE)]
+                    
+            elif class_name == "ds_engineer":
+                text1, key1, fl1, pos1 = compare_and_replace("design engineer",text_paragraph)
+                if fl1:
+                    if ':' in text1[pos1:]:
+                        string = re.sub(rf'^.*?{re.escape(key1)}[:\s]*', '', text1, flags=re.IGNORECASE)
+                        return  [class_name, string] 
+                    else:
+                        return [class_name,re.sub(rf'{re.escape(key1)}\s*', '', text1, flags=re.IGNORECASE)]
+                        
+            return [class_name, text_paragraph]               
+                        
+        def is_within_bbox(pos, data_table):
+            x_min, y_min, x_max, y_max = pos
+            for bbox in data_table:
+                bx_min, by_min, bx_max, by_max = bbox
+                if x_min >= bx_min and y_min >= by_min and x_max <= bx_max and y_max <= by_max:
+                    return True
+            return False
+
+        def compare_and_replace(str1, str2, threshold=0.6):
+            whitespace_positions = [pos for pos, char in enumerate(str2) if char == ' ']
+            joined_words = str2.replace(' ', '')
+            cleaned_str1 = str1.replace(' ', '').lower()
+            
+            len_str1 = len(cleaned_str1)
+            best_ratio = 0
+            best_position = -1
+            key = ""
+            for i in range(len(joined_words) - len_str1 + 1):
+                substring = joined_words[i:i+len_str1]
+                similarity_ratio = SequenceMatcher(None, cleaned_str1, substring.lower()).ratio()
+                if similarity_ratio > best_ratio and similarity_ratio >= threshold:
+                    best_ratio = similarity_ratio
+                    best_position = i
+                    key = substring.lower()
+            if best_position == -1:
+                return str2, key, False, 0
+            for idx in range(len(whitespace_positions)):
+                    if whitespace_positions[idx] <= best_position:
+                        best_position +=1
+                    if best_position <= whitespace_positions[idx] < (best_position + len_str1):
+                        whitespace_positions[idx] = best_position + len_str1
+            # print(whitespace_positions, best_position)
+            result = list(joined_words)  
+            for pos in whitespace_positions:
+                if pos <= len(result):  
+                    result.insert(pos, ' ')
+            result = ''.join(result) 
+            return result, key, True, best_position + len_str1
 
         # Process predictions
         for i, det in enumerate(pred):  # per image
@@ -232,32 +371,53 @@ def run(
                 p, im0, frame = path[i], im0s[i].copy(), dataset.count
                 s += f"{i}: "
             else:
+                # size_z = 3200
+                # size_y = 2000
+                # if (im0s.shape[0]< size_y) or (im0s.shape[1]< size_z):
+                #     if (im0s.shape[1]< size_z):
+                #         scale =  size_z/ im0s.shape[1]  
+                #         size_y = im0s.shape[0]*scale
+                #     else:
+                #         scale =  size_y/ im0s.shape[0]  
+                #         size_z = im0s.shape[1]*scale 
+                #     image_resize = cv2.imread(path)
+                #     image_resize = cv2.resize(image_resize, (int(size_z), int(size_y)))
+                #     p, im0, frame = path, image_resize, getattr(dataset, "frame", 0)           
+                # else :
                 p, im0, frame = path, im0s.copy(), getattr(dataset, "frame", 0)
-
             p = Path(p)  # to Path
+            data_img = []
+            data_table = []
+            get_label = [1,2,3,4,5,6]
+            tempdict = {}
+            tflag = False
             save_path = str(save_dir / p.name)  # im.jpg
             txt_path = str(save_dir / "labels" / p.stem) + ("" if dataset.mode == "image" else f"_{frame}")  # im.txt
             s += "{:g}x{:g} ".format(*im.shape[2:])  # print string
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             imc = im0.copy() if save_crop else im0  # for save_crop
+            
             annotator = Annotator(im0, line_width=line_thickness, example=str(names))
             if len(det):
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_boxes(im.shape[2:], det[:, :4], im0.shape).round()
-
                 # Print results
                 for c in det[:, 5].unique():
                     n = (det[:, 5] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-
                 # Write results
-                for *xyxy, conf, cls in reversed(det):
-                    print('jhbuihbijcbnijc:', xyxy)
+                det = det[det[:, 5].argsort()]
+                for *xyxy, conf, cls in det:   
                     c = int(cls)  # integer class
+                    if c == 0:
+                        xyxy = [coord.item() for coord in xyxy]
+                        data_table.append(xyxy)
+                        print("table: ", xyxy)
+                        continue
+                    tflag = False
                     label = names[c] if hide_conf else f"{names[c]}"
                     confidence = float(conf)
                     confidence_str = f"{confidence:.2f}"
-
                     if save_csv:
                         write_to_csv(p.name, label, confidence_str)
 
@@ -277,8 +437,17 @@ def run(
                         label = None if hide_labels else (names[c] if hide_conf else f"{names[c]} {conf:.2f}")
                         annotator.box_label(xyxy, label, color=colors(c, True))
                     if save_crop:
-                        save_one_box(xyxy, imc, file=save_dir / "crops" / names[c] / f"{p.stem}.jpg", BGR=True)
-
+                        # get save crop
+                        # img_ocr = save_one_box(xyxy, imc, file=save_dir / "crops" / names[c] / f"{p.stem}.png", BGR=True)
+                        img_ocr = save_one_box(xyxy, imc, file=save_dir / "crops" / f"{p.stem}" / f"{names[c]}.png", BGR=True, save= False)
+                        
+                        if c in get_label:
+                            pos = [coord.item() for coord in xyxy]
+                            if is_within_bbox(pos, data_table):
+                                tflag = True
+                            text_grap = get_data_form_crop(img_ocr, names[c],pathsave= save_dir / "crops" / f"{p.stem}" / f"{names[c]}.jpg")
+                            if len(text_grap[1]) !=0:
+                                data_img.append([text_grap[0],text_grap[1], tflag])           
             # Stream results
             im0 = annotator.result()
             if view_img:
@@ -286,8 +455,6 @@ def run(
                     windows.append(p)
                     cv2.namedWindow(str(p), cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)  # allow window resize (Linux)
                     cv2.resizeWindow(str(p), im0.shape[1], im0.shape[0])
-                cv2.imshow(str(p), im0)
-                cv2.waitKey(1)  # 1 millisecond
 
             # Save results (image with detections)
             if save_img:
@@ -307,11 +474,33 @@ def run(
                         save_path = str(Path(save_path).with_suffix(".mp4"))  # force *.mp4 suffix on results videos
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
                     vid_writer[i].write(im0)
-
-        # Print time (inference-only)
+            tempdict[path] = data_img
+            # for image_path, detections in tempdict.items():
+            #     for detection in detections:
+            #         print(detection)
+            #         class_name, detected_text = detection
+            #         print(class_name, detected_text)
+            data_csv.append(tempdict)
         LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms")
 
-    # Print results
+    # Ghi dữ liệu vào file CSV
+    output_csv_path = Path(save_dir) / "ocr_results.csv"
+    with open(output_csv_path, mode="w", newline="", encoding="utf-8") as csvfile:
+        fieldnames = ["Image Name","tflag", "Class Name", "Detected Text"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for item in data_csv:
+            for image_path, detections in item.items():
+                for detection in detections:
+                    class_name, detected_text, tflag = detection
+                    writer.writerow({
+                        "Image Name": image_path,
+                         "tflag": tflag,
+                        "Class Name": class_name,
+                        "Detected Text": detected_text
+                    })
+    print(f"Data saved successfully to {output_csv_path}")
+    # Print results   
     t = tuple(x.t / seen * 1e3 for x in dt)  # speeds per image
     LOGGER.info(f"Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}" % t)
     if save_txt or save_img:

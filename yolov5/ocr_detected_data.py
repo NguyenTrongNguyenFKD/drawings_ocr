@@ -84,6 +84,11 @@ def  process_string(string):
                 str = re.sub(r'^.*?material[:\s]*', '', string[1], flags=re.IGNORECASE)
                 return str
             return re.sub(r'material\s*', '', string[1], flags=re.IGNORECASE)
+        if re.search(r'description[:\s]*', string[1], flags=re.IGNORECASE):
+            if ':' in string[1][string[1].lower().index("description") + len("description"):]:
+                str = re.sub(r'^.*?description[:\s]*', '', string[1], flags=re.IGNORECASE)
+                return str
+            return re.sub(r'description\s*', '', string[1], flags=re.IGNORECASE)
     if string[0] == "part_number":
         if re.search(r'part number[:\s]*', string[1], flags=re.IGNORECASE):
             if ':' in string[1][string[1].lower().index("part number") + len("part number"):]:
@@ -96,12 +101,28 @@ def  process_string(string):
                 str = re.sub(r'^.*?part no[:\s]*', '', string[1], flags=re.IGNORECASE)
                 return str
             return re.sub(r'part no\s*', '', string[1], flags=re.IGNORECASE)
-        # str = re.sub(r'identify with part number', '', string[1], flags=re.IGNORECASE)
-        # str = re.sub(r'part number', '', string[1], flags=re.IGNORECASE)
-        # str = re.sub(r'part no', '', string[1], flags=re.IGNORECASE)
-        # str = re.sub(r'identifying no', '', string[1], flags=re.IGNORECASE)       
-        # str = re.sub(r'identify', '', string[1], flags=re.IGNORECASE)
-        # print(str)
+    if string[0] == "finish":
+        if re.search(r'finish[:\s]*', string[1], flags=re.IGNORECASE):
+            if ':' in string[1][string[1].lower().index("finish") + len("finish"):]:
+                str = re.sub(r'^.*?finish[:\s]*', '', string[1], flags=re.IGNORECASE)
+                return str
+            return re.sub(r'finish\s*', '', string[1], flags=re.IGNORECASE)
+    if string[0] == "dwg_no":
+        if re.search(r'drawing no[:\s]*', string[1], flags=re.IGNORECASE):
+            if ':' in string[1][string[1].lower().index("drawing no") + len("drawing no"):]:
+                str = re.sub(r'^.*?drawing no[:\s]*', '', string[1], flags=re.IGNORECASE)
+                return str
+            return re.sub(r'drawing no\s*', '', string[1], flags=re.IGNORECASE)   
+        if re.search(r'drawingno[:\s]*', string[1], flags=re.IGNORECASE):
+            if ':' in string[1][string[1].lower().index("drawingno") + len("drawingno"):]:
+                str = re.sub(r'^.*?drawingno[:\s]*', '', string[1], flags=re.IGNORECASE)
+                return str
+            return re.sub(r'drawingno\s*', '', string[1], flags=re.IGNORECASE)    
+        if re.search(r'dwg no[:\s]*', string[1], flags=re.IGNORECASE):
+            if ':' in string[1][string[1].lower().index("dwg no") + len("dwg no"):]:
+                str = re.sub(r'^.*?dwg no[:\s]*', '', string[1], flags=re.IGNORECASE)
+                return str
+            return re.sub(r'dwg no\s*', '', string[1], flags=re.IGNORECASE)
     return string[1]
             
         
@@ -111,6 +132,7 @@ def Get_data_formPDF(list_find,object_list):
     with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['class_name', 'extracted_text'])
+        result = []
         for obj in object_list:
             for key, data in obj.items():
                 print(f"Processing image: {key}")
@@ -132,22 +154,22 @@ def Get_data_formPDF(list_find,object_list):
                     for (bbox, text, confidence) in ocr_results:
                         if is_within_bbox(bbox, x1, y1, x2, y2):
                             strings = strings +" "+ text
-                    # print(class_id, ":", strings)
-                    datas.append((names[class_id],strings, flag_table))
-                for d in datas:
-                    processed_data = process_string(d)
-                    # print(d[0],d[2],":",processed_data)
-                    
-                    csv_writer.writerow((d[0],d[2],":",processed_data))
-
+                    datas.append([names[class_id],strings, flag_table])
+                for i,d in enumerate(datas):
+                    datas[i][1] = process_string(d)
+                    result.append(datas)
+                    # print(d[0],d[2],":",datas[i][1])
+                    csv_writer.writerow((d[0],d[2],":",datas[i][1]))
+        return result
     
 def main():
     # Example usage:
-    labels_dir = r"./runs/detect/exp8/labels"
+    labels_dir = r"./runs/detect/exp/labels"
     images_dir = r"./datasets/test" 
     object_list = convert_txt_to_4point_coordinates(labels_dir, images_dir)
     list_find = [0,1,2,3,4]
-    Get_data_formPDF(list_find,object_list)
+    data_processed = Get_data_formPDF(list_find,object_list)
+    
     # for obj in object_list:
     #     for key, data in obj.items():
     #         print(f"Processing image: {key}")
